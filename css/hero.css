@@ -226,6 +226,51 @@
   padding: 0.5rem 0 1.5rem;
 }
 
+@keyframes hero-intro-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-slide--initial .hero-badge,
+.hero-slide--initial .hero-eyebrow,
+.hero-slide--initial .hero-title,
+.hero-slide--initial .hero-description,
+.hero-slide--initial .hero-actions,
+.hero-slide--initial .hero-figure {
+  animation: hero-intro-rise 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-slide--initial .hero-badge {
+  animation-delay: 100ms;
+}
+
+.hero-slide--initial .hero-eyebrow {
+  animation-delay: 180ms;
+}
+
+.hero-slide--initial .hero-title {
+  animation-delay: 260ms;
+}
+
+.hero-slide--initial .hero-description {
+  animation-delay: 380ms;
+}
+
+.hero-slide--initial .hero-actions {
+  animation-delay: 500ms;
+}
+
+.hero-slide--initial .hero-figure {
+  animation-delay: 220ms;
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;

@@ -1,151 +1,58 @@
-const heroSlides = [
-  {
-    category: 'feminino',
-    badge: 'FEMININO',
-    eyebrow: 'Elas podem +',
-    title: 'ESTILO <em>elevado</em> PARA <em>mulheres</em> DE OUTRO NÍVEL',
-    description: 'Venha conhecer esta e outras de nossas peças exclusivas com caimento impecável e modelagem autoral.',
-    cta: 'EXPLORAR PEÇAS FEMININAS',
-    image: 'public/images/IMG_1493.jpeg',
-    alt: 'Modelo feminina em editorial de moda com roupa elegante',
-    label: 'DROP 01 // EDITORIAL'
-  },
-  {
-    category: 'masculino',
-    badge: 'MASCULINO',
-    eyebrow: 'Com estilo +',
-    title: 'ESTILO <em>atual</em> PARA <em>homens</em> QUE QUEREM SE DESTACAR',
-    description: 'Coleções pensadas para compor looks versáteis com peças sofisticadas e acabamento impecável.',
-    cta: 'EXPLORAR PEÇAS MASCULINAS',
-    image: 'public/images/IMG_1491.jpeg',
-    alt: 'Modelo masculino em estilo editorial com roupa sofisticada',
-    label: 'DROP 02 // EDITORIAL'
-  },
-  {
-    category: 'infantil',
-    badge: 'INFANTIL',
-    eyebrow: 'Pra brincar +',
-    title: 'CONFORTO <em>inspirado</em> PARA <em>crianças</em> EM MOVIMENTO',
-    description: 'Peças leves, divertidas e cheias de personalidade para o dia a dia da família.',
-    cta: 'EXPLORAR PEÇAS INFANTIS',
-    image: 'public/images/Code_Generated_Image (11).png',
-    alt: 'Criança em look casual com peças descontraídas e modernas',
-    label: 'DROP 03 // EDITORIAL'
-  },
-  {
-    category: 'acessorios',
-    badge: 'ACESSÓRIOS',
-    eyebrow: 'Detalhe que faz +',
-    title: 'ACESSÓRIOS <em>premium</em> QUE <em>completam</em> QUALQUER LOOK',
-    description: 'Finalize o visual com detalhes que elevam o estilo e reforçam a identidade da sua rotina.',
-    cta: 'EXPLORAR ACESSÓRIOS',
-    image: 'public/images/Code_Generated_Image (10).png',
-    alt: 'Detalhe de acessórios de moda em composição editorial',
-    label: 'DROP 04 // EDITORIAL'
-  }
-];
-
 const initHeroCarousel = () => {
-  const tabs = document.querySelectorAll('.category-tab');
-  const dots = document.querySelectorAll('.carousel-dot');
-  const prevButton = document.querySelector('.carousel-button--prev');
-  const nextButton = document.querySelector('.carousel-button--next');
-  const heroBadge = document.querySelector('.hero-badge-text');
-  const heroEyebrow = document.querySelector('.hero-eyebrow');
-  const heroTitle = document.querySelector('.hero-title');
-  const heroDescription = document.querySelector('.hero-description');
-  const heroPrimaryText = document.querySelector('.btn-primary-text');
-  const heroPrimaryLink = document.querySelector('.btn-primary');
-  const heroImage = document.querySelector('.hero-figure img');
-  const heroImageAlt = document.querySelector('.hero-figure img');
-  const heroCaption = document.querySelector('.hero-figure figcaption');
+  const carousel = document.querySelector('.hero-carousel');
+  const slides = carousel?.querySelectorAll('.hero-slide-toggle');
   const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  if (!tabs.length || !dots.length || !heroBadge || !heroEyebrow || !heroTitle || !heroDescription || !heroPrimaryText || !heroPrimaryLink || !heroImage || !heroCaption) {
+  if (!carousel || !slides?.length || reduceMotionQuery.matches) {
     return;
   }
 
-  let activeIndex = 0;
+  const presentationTime = 7000;
+  let autoplayId = null;
+  let pointerInside = false;
+  let focusInside = false;
 
-  const updateSlide = (nextIndex) => {
-    const slide = heroSlides[nextIndex];
-    if (!slide) return;
-
-    activeIndex = nextIndex;
-
-    heroBadge.textContent = slide.badge;
-    heroEyebrow.textContent = slide.eyebrow;
-    heroTitle.innerHTML = slide.title;
-    heroDescription.textContent = slide.description;
-    heroPrimaryText.textContent = slide.cta;
-    heroImage.src = slide.image;
-    heroImage.alt = slide.alt;
-    heroCaption.textContent = slide.label;
-
-    const isPrimaryWhatsApp = slide.category === 'feminino';
-    heroPrimaryLink.href = isPrimaryWhatsApp
-      ? 'https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20explorar%20as%20pe%C3%A7as%20femininas'
-      : 'https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20conhecer%20as%20pe%C3%A7as%20da%20Douglas%20Store';
-
-    tabs.forEach((tab, index) => {
-      const isActive = index === activeIndex;
-      tab.classList.toggle('is-active', isActive);
-      tab.setAttribute('aria-selected', String(isActive));
-    });
-
-    dots.forEach((dot, index) => {
-      const isActive = index === activeIndex;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-current', String(isActive));
-    });
+  const stopAutoplay = () => {
+    window.clearTimeout(autoplayId);
+    autoplayId = null;
   };
 
-  const moveToCategory = (category) => {
-    const index = heroSlides.findIndex((slide) => slide.category === category);
-    if (index >= 0) updateSlide(index);
+  const scheduleAutoplay = () => {
+    stopAutoplay();
+    if (pointerInside || focusInside || document.hidden || reduceMotionQuery.matches) return;
+
+    autoplayId = window.setTimeout(() => {
+      const currentIndex = [...slides].findIndex((slide) => slide.checked);
+      const nextSlide = slides[(currentIndex + 1) % slides.length];
+
+      nextSlide.checked = true;
+      nextSlide.dispatchEvent(new Event('change', { bubbles: true }));
+    }, presentationTime);
   };
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => moveToCategory(tab.dataset.category));
+  carousel.addEventListener('change', scheduleAutoplay);
+  carousel.addEventListener('mouseenter', () => {
+    pointerInside = true;
+    stopAutoplay();
   });
-
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => moveToCategory(dot.dataset.category));
+  carousel.addEventListener('mouseleave', () => {
+    pointerInside = false;
+    scheduleAutoplay();
   });
-
-  prevButton.addEventListener('click', () => {
-    const nextIndex = (activeIndex - 1 + heroSlides.length) % heroSlides.length;
-    updateSlide(nextIndex);
+  carousel.addEventListener('focusin', () => {
+    focusInside = true;
+    stopAutoplay();
   });
-
-  nextButton.addEventListener('click', () => {
-    const nextIndex = (activeIndex + 1) % heroSlides.length;
-    updateSlide(nextIndex);
+  carousel.addEventListener('focusout', () => {
+    window.setTimeout(() => {
+      focusInside = carousel.contains(document.activeElement);
+      scheduleAutoplay();
+    }, 0);
   });
+  document.addEventListener('visibilitychange', scheduleAutoplay);
+  reduceMotionQuery.addEventListener('change', scheduleAutoplay);
 
-  if (!reduceMotionQuery.matches) {
-    let autoplayId = null;
-    const startAutoplay = () => {
-      clearInterval(autoplayId);
-      autoplayId = setInterval(() => {
-        const nextIndex = (activeIndex + 1) % heroSlides.length;
-        updateSlide(nextIndex);
-      }, 5000);
-    };
-
-    const stopAutoplay = () => {
-      clearInterval(autoplayId);
-    };
-
-    startAutoplay();
-    const carousel = document.querySelector('.hero-controls');
-    if (carousel) {
-      carousel.addEventListener('mouseenter', stopAutoplay);
-      carousel.addEventListener('mouseleave', startAutoplay);
-      carousel.addEventListener('focusin', stopAutoplay);
-      carousel.addEventListener('focusout', startAutoplay);
-    }
-  }
+  scheduleAutoplay();
 };
 
 const initMobileNavigation = () => {
