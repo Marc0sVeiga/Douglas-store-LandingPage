@@ -21,7 +21,10 @@ Use esta estrutura mínima ao iniciar um projeto novo:
 projeto/
 ├── index.html
 ├── css/
-│   └── styles.css
+│   ├── base.css
+│   ├── header.css
+│   ├── mobile-navigation.css
+│   └── responsive.css
 ├── js/
 │   └── main.js
 └── public/
@@ -32,7 +35,9 @@ Regras:
 - `index.html` fica na raiz do projeto.
 - A estrutura inicial do `index.html` pode ser **simples** (ex.: `header`, `main`, `footer`) e evoluir por etapas.
 - Se necessário, comece no nível mais básico: apenas `html`, `head` e `body`, e adicione seções semânticas depois.
-- `css/styles.css` contém estilos globais e animações.
+- `css/base.css` contém tokens e estilos globais.
+- Separe os estilos por componente e responsividade em arquivos CSS próprios, importados pelo `index.html`.
+- `css/responsive.css` concentra todas as media queries do projeto.
 - `js/main.js` contém interações em JavaScript vanilla.
 - Assets visuais devem ficar em `public/images/`.
 

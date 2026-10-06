@@ -3,9 +3,23 @@
   --font-editorial: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --color-header: rgba(125, 244, 255, 0.95);
+  --color-text: #000000;
+  --color-active: #0045cc;
+  --color-header-border: rgba(0, 0, 0, 0.1);
+  --color-white: #ffffff;
+  --header-height: 80px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
+  margin: 0;
+  color: var(--color-text);
   font-family: var(--font-body);
   font-weight: 400;
 }
@@ -33,4 +47,18 @@ nav {
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-active);
+  outline-offset: 3px;
 }

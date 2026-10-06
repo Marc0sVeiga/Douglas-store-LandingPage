@@ -1,0 +1,149 @@
+.site-header {
+  position: relative;
+  z-index: 10;
+  background: var(--color-header);
+  border-bottom: 1px solid var(--color-header-border);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+.header-inner {
+  display: flex;
+  min-height: var(--header-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 32px;
+}
+
+.brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  overflow: hidden;
+  place-items: center;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  background: var(--color-text);
+  box-shadow:
+    0 4px 6px -2px rgb(0 0 0 / 10%),
+    0 4px 8px -2px rgb(0 0 0 / 10%);
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  padding-left: 14px;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 20px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-location {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.desktop-navigation {
+  margin-inline: auto;
+}
+
+.navigation-list,
+.drawer-navigation-list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-list {
+  gap: 24px;
+}
+
+.navigation-list a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 160ms ease;
+}
+
+.navigation-list a:hover {
+  color: var(--color-active);
+}
+
+.whatsapp-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--color-text);
+  border-radius: 8px;
+  background: var(--color-text);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.whatsapp-link:hover {
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.whatsapp-link:active {
+  transform: translateY(1px);
+}
+
+.whatsapp-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.desktop-whatsapp {
+  padding: 10px 20px;
+}
