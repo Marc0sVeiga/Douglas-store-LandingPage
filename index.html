@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/mobile-navigation.css" />
     <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/lookbook.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/content.js" defer></script>
     <script src="js/main.js" defer></script>
   </head>
   <body>
@@ -44,13 +46,7 @@
         </a>
 
         <nav class="desktop-navigation" aria-label="Navegação principal">
-          <ul class="navigation-list">
-            <li><a href="#masculino">Masculino</a></li>
-            <li><a href="#feminino" aria-current="page">Feminino</a></li>
-            <li><a href="#infantil">Infantil</a></li>
-            <li><a href="#acessorios">Acessórios</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-          </ul>
+          <ul class="navigation-list" data-navigation-list></ul>
         </nav>
 
         <a
@@ -123,13 +119,7 @@
         </div>
 
         <nav class="drawer-navigation" aria-label="Navegação mobile">
-          <ul class="drawer-navigation-list">
-            <li><a href="#masculino">Masculino</a></li>
-            <li><a href="#feminino" aria-current="page">Feminino</a></li>
-            <li><a href="#infantil">Infantil</a></li>
-            <li><a href="#acessorios">Acessórios</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-          </ul>
+          <ul class="drawer-navigation-list" data-navigation-list></ul>
         </nav>
 
         <a
@@ -147,6 +137,9 @@
         </a>
       </aside>
     </header>
+    <noscript>
+      <p>Ative o JavaScript para visualizar as coleções e os produtos da loja.</p>
+    </noscript>
     <main>
       <section class="hero-section" aria-label="Hero da Douglas Store">
         <div class="hero-decor hero-decor--one" aria-hidden="true"></div>
@@ -165,249 +158,49 @@
               aria-label="Coleção selecionada"
               aria-live="polite"
               aria-roledescription="carrossel"
+              data-hero-panels
             >
-              <input
-                class="hero-slide-toggle"
-                type="radio"
-                name="hero-category"
-                id="hero-feminino"
-                aria-label="Feminino"
-                checked
-              />
-              <article class="hero-slide hero-slide--initial" aria-label="Coleção Feminina">
-                <div class="hero-copy">
-                  <span class="hero-badge"
-                    ><span class="hero-badge-dot" aria-hidden="true"></span
-                    >FEMININO</span
-                  >
-                  <p class="hero-eyebrow">Elas podem +</p>
-                  <h1 class="hero-title">
-                    ESTILO <em>elevado</em> PARA <em>mulheres</em> DE OUTRO
-                    NÍVEL
-                  </h1>
-                  <div class="hero-actions">
-                    <a
-                      class="btn btn-primary"
-                      href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20explorar%20as%20pe%C3%A7as%20femininas"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >EXPLORAR PEÇAS FEMININAS</a
-                    >
-                    <a class="btn btn-secondary" href="#lookbook"
-                      ><span>VER NO LOOKBOOK</span
-                      ><span aria-hidden="true" class="btn-arrow">↓</span></a
-                    >
+              <template data-hero-slide-template>
+                <input
+                  class="hero-slide-toggle"
+                  type="radio"
+                  name="hero-category"
+                />
+                <article class="hero-slide">
+                  <div class="hero-copy">
+                    <span class="hero-badge">
+                      <span class="hero-badge-dot" aria-hidden="true"></span>
+                      <span data-slide-badge></span>
+                    </span>
+                    <p class="hero-eyebrow" data-slide-eyebrow></p>
+                    <h2 class="hero-title" data-slide-title></h2>
+                    <p class="hero-description" data-slide-description></p>
+                    <div class="hero-actions">
+                      <a
+                        class="btn btn-primary"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-slide-contact
+                      ></a>
+                      <a class="btn btn-secondary" href="#lookbook">
+                        <span>VER NO LOOKBOOK</span>
+                        <span aria-hidden="true" class="btn-arrow">↓</span>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <figure class="hero-figure hero-figure--feminino">
-                  <img
-                    src="./public/images/vestido-fem-estampado-marinho.png"
-                    alt="Modelo usando vestido longo branco com estampa preta em um editorial de moda"
-                  />
-                </figure>
-              </article>
-
-              <input
-                class="hero-slide-toggle"
-                type="radio"
-                name="hero-category"
-                id="hero-masculino"
-                aria-label="Masculino"
-              />
-              <article class="hero-slide" aria-label="Coleção Masculina">
-                <div class="hero-copy">
-                  <span class="hero-badge"
-                    ><span class="hero-badge-dot" aria-hidden="true"></span
-                    >MASCULINO</span
-                  >
-                  <p class="hero-eyebrow">Com + estilo</p>
-                  <h2 class="hero-title">
-                    ESTILO PARA <em>homens</em> QUE QUEREM SE DESTACAR
-                  </h2>
-                  <p class="hero-description">
-                    Calças e peças versáteis para compor looks atuais, com
-                    conforto e acabamento impecável.
-                  </p>
-                  <div class="hero-actions">
-                    <a
-                      class="btn btn-primary"
-                      href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20explorar%20as%20pe%C3%A7as%20masculinas"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >EXPLORAR PEÇAS MASCULINAS</a
-                    >
-                    <a class="btn btn-secondary" href="#lookbook"
-                      ><span>VER NO LOOKBOOK</span
-                      ><span aria-hidden="true" class="btn-arrow">↓</span></a
-                    >
-                  </div>
-                </div>
-                <figure class="hero-figure">
-                  <img
-                    src="./public/images/calca-azul-claro-zoom.png"
-                    alt="Modelo usando calça cargo cinza e tênis branco"
-                  />
-                </figure>
-              </article>
-
-              <input
-                class="hero-slide-toggle"
-                type="radio"
-                name="hero-category"
-                id="hero-infantil"
-                aria-label="Infantil"
-              />
-              <article class="hero-slide" aria-label="Coleção Infantil">
-                <div class="hero-copy">
-                  <span class="hero-badge"
-                    ><span class="hero-badge-dot" aria-hidden="true"></span
-                    >INFANTIL</span
-                  >
-                  <p class="hero-eyebrow">Pra brincar +</p>
-                  <h2 class="hero-title">
-                    PEÇAS <em>divertidas</em> PARA <em>pequenos</em> GRANDES
-                    MOMENTOS
-                  </h2>
-                  <p class="hero-description">
-                    Camisetas e combinações descontraídas para acompanhar a
-                    rotina cheia de descobertas.
-                  </p>
-                  <div class="hero-actions">
-                    <a
-                      class="btn btn-primary"
-                      href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20explorar%20as%20pe%C3%A7as%20infantis"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >EXPLORAR PEÇAS INFANTIS</a
-                    >
-                    <a class="btn btn-secondary" href="#lookbook"
-                      ><span>VER NO LOOKBOOK</span
-                      ><span aria-hidden="true" class="btn-arrow">↓</span></a
-                    >
-                  </div>
-                </div>
-                <figure class="hero-figure">
-                  <img
-                    src="./public/images/conjunto-infantil.png"
-                    alt="Camiseta estampada e bermuda jeans apresentadas em uma composição de produto"
-                  />
-                </figure>
-              </article>
-
-              <input
-                class="hero-slide-toggle"
-                type="radio"
-                name="hero-category"
-                id="hero-acessorios"
-                aria-label="Acessórios"
-              />
-              <article class="hero-slide" aria-label="Coleção de Acessórios">
-                <div class="hero-copy">
-                  <span class="hero-badge"
-                    ><span class="hero-badge-dot" aria-hidden="true"></span
-                    >ACESSÓRIOS</span
-                  >
-                  <p class="hero-eyebrow">Detalhe que faz +</p>
-                  <h2 class="hero-title">
-                    ACESSÓRIOS QUE <em>complementam</em> QUALQUER LOOK
-                  </h2>
-                  <p class="hero-description">
-                    Complete a produção com acessórios que acrescentam
-                    personalidade ao seu estilo.
-                  </p>
-                  <div class="hero-actions">
-                    <a
-                      class="btn btn-primary"
-                      href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20quero%20explorar%20os%20acess%C3%B3rios"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >EXPLORAR ACESSÓRIOS</a
-                    >
-                    <a class="btn btn-secondary" href="#lookbook"
-                      ><span>VER NO LOOKBOOK</span
-                      ><span aria-hidden="true" class="btn-arrow">↓</span></a
-                    >
-                  </div>
-                </div>
-                <figure class="hero-figure">
-                  <img
-                    src="./public/images/bone-marrom-acess.jpeg"
-                    alt="Boné estampado fotografado em fundo claro"
-                  />
-                </figure>
-              </article>
+                  <figure class="hero-figure">
+                    <img data-slide-image />
+                  </figure>
+                </article>
+              </template>
             </div>
 
-            <div class="hero-controls" aria-label="Controles do carrossel">
-              <div class="carousel-navigation carousel-navigation--previous">
-                <label
-                  class="carousel-button"
-                  for="hero-acessorios"
-                  aria-label="Ir para acessórios"
-                  ><span aria-hidden="true">&#8249;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-feminino"
-                  aria-label="Ir para feminino"
-                  ><span aria-hidden="true">&#8249;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-masculino"
-                  aria-label="Ir para masculino"
-                  ><span aria-hidden="true">&#8249;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-infantil"
-                  aria-label="Ir para infantil"
-                  ><span aria-hidden="true">&#8249;</span></label
-                >
-              </div>
-
-              <div class="carousel-dots" aria-label="Ir para uma categoria">
-                <label class="carousel-dot" for="hero-feminino"
-                  ><span class="visually-hidden">Feminino</span></label
-                >
-                <label class="carousel-dot" for="hero-masculino"
-                  ><span class="visually-hidden">Masculino</span></label
-                >
-                <label class="carousel-dot" for="hero-infantil"
-                  ><span class="visually-hidden">Infantil</span></label
-                >
-                <label class="carousel-dot" for="hero-acessorios"
-                  ><span class="visually-hidden">Acessórios</span></label
-                >
-              </div>
-
-              <div class="carousel-navigation carousel-navigation--next">
-                <label
-                  class="carousel-button"
-                  for="hero-masculino"
-                  aria-label="Ir para masculino"
-                  ><span aria-hidden="true">&#8250;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-infantil"
-                  aria-label="Ir para infantil"
-                  ><span aria-hidden="true">&#8250;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-acessorios"
-                  aria-label="Ir para acessórios"
-                  ><span aria-hidden="true">&#8250;</span></label
-                >
-                <label
-                  class="carousel-button"
-                  for="hero-feminino"
-                  aria-label="Ir para feminino"
-                  ><span aria-hidden="true">&#8250;</span></label
-                >
-              </div>
-            </div>
+            <div
+              class="hero-controls"
+              aria-label="Controles do carrossel"
+              data-hero-controls
+            ></div>
           </div>
         </fieldset>
 
@@ -504,6 +297,25 @@
               <span>PIX</span>
             </li>
           </ul>
+        </div>
+      </section>
+
+      <section
+        class="lookbook-section"
+        id="lookbook"
+        aria-labelledby="lookbook-title"
+      >
+        <div class="lookbook-inner">
+          <header class="lookbook-header">
+            <h2 class="lookbook-title" id="lookbook-title">LOOKBOOK</h2>
+            <p class="lookbook-subtitle">&amp; galeria visual autoral</p>
+          </header>
+
+          <ul
+            class="lookbook-grid"
+            aria-label="Galeria de produtos e looks"
+            data-lookbook-grid
+          ></ul>
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 @media (max-width: 767px) {
-  :root {
+  .site-header {
     --header-height: 66px;
   }
 

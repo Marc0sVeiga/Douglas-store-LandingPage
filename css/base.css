@@ -9,6 +9,25 @@
   --color-header-border: rgba(0, 0, 0, 0.1);
   --color-white: #ffffff;
   --header-height: 80px;
+  --hero-bg: #eef0ff;
+  --hero-bg-soft: rgba(11, 63, 217, 0.08);
+  --hero-text: #0a0a0a;
+  --hero-blue: #0b3fd9;
+  --hero-blue-dark: #0834b4;
+  --hero-cyan: #7fe5ff;
+  --hero-cyan-soft: #dffcff;
+  --hero-chip-bg: #ffffff;
+  --hero-chip-border: rgba(10, 10, 10, 0.5);
+  --hero-card-shadow: 0 18px 40px rgba(24, 37, 84, 0.12);
+  --hero-dot-size: 0.625rem;
+  --hero-dot-size-active: 2.5rem;
+  --lookbook-bg: #eef0ff;
+  --lookbook-frame: #7fd8f5;
+  --lookbook-text: #0a0a0a;
+  --lookbook-blue: #0b3fd9;
+  --lookbook-image-border: #dce5f2;
+  --lookbook-radius: 0.5rem;
+  --lookbook-gap: 0.5rem;
 }
 
 *,
