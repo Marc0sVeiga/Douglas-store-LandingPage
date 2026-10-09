@@ -1,7 +1,7 @@
-.community-section {
-  --community-cyan: #7df4ff;
-  --community-text: #e3e9fc;
-  --community-border: #7df4ff;
+.loja-fisica-section {
+  --loja-fisica-cyan: #7df4ff;
+  --loja-fisica-text: #e3e9fc;
+  --loja-fisica-border: #7df4ff;
 
   position: relative;
   isolation: isolate;
@@ -16,7 +16,7 @@
   gap: 0;
   overflow: hidden;
   padding: 2rem 1rem 2.5rem;
-  border: 1px solid var(--community-border);
+  border: 1px solid var(--loja-fisica-border);
   background:
     linear-gradient(
       180deg,
@@ -28,7 +28,7 @@
   color: #fff;
 }
 
-.community-tag {
+.loja-fisica-tag {
   grid-area: heading;
   display: inline-flex;
   align-items: center;
@@ -48,16 +48,16 @@
   text-align: center;
 }
 
-.community-tag-dot {
+.loja-fisica-tag-dot {
   width: 0.5rem;
   height: 0.5rem;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: var(--community-cyan);
+  background: var(--loja-fisica-cyan);
   box-shadow: 0 0 0.75rem rgb(125 244 255 / 65%);
 }
 
-.community-map {
+.loja-fisica-map {
   grid-area: map;
   width: min(100%, 35.75rem);
   height: 11.25rem;
@@ -68,19 +68,19 @@
   box-shadow: 0 8px 24px rgb(0 0 0 / 35%);
 }
 
-.community-map iframe {
+.loja-fisica-map iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
 }
 
-.community-description {
+.loja-fisica-description {
   grid-area: description;
   max-width: 38rem;
   margin: 0;
   padding: 1rem 0 1.25rem;
-  color: var(--community-text);
+  color: var(--loja-fisica-text);
   font-family: "Chivo", var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -88,7 +88,7 @@
   text-align: center;
 }
 
-.community-testimonials {
+.loja-fisica-testimonials {
   grid-area: testimonials;
   display: grid;
   width: 100%;
@@ -100,7 +100,7 @@
   list-style: none;
 }
 
-.community-testimonials li {
+.loja-fisica-testimonials li {
   min-width: 0;
 }
 
@@ -158,7 +158,7 @@
 
 .testimonial-quote {
   margin: 1rem 0 0;
-  color: var(--community-text);
+  color: var(--loja-fisica-text);
   font-family: "Chivo", var(--font-body);
   font-size: 0.875rem;
   font-style: italic;
@@ -168,7 +168,7 @@
 .testimonial-verified {
   margin: auto 0 0;
   padding-top: 1rem;
-  color: var(--community-cyan);
+  color: var(--loja-fisica-cyan);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 700;
@@ -176,7 +176,7 @@
   line-height: 1.5;
 }
 
-.community-maps-link {
+.loja-fisica-maps-link {
   grid-area: maps-link;
   justify-self: center;
   margin-top: 1rem;
@@ -185,16 +185,16 @@
   font-size: 0.75rem;
   line-height: 1.6;
   text-align: center;
-  text-decoration-color: var(--community-cyan);
+  text-decoration-color: var(--loja-fisica-cyan);
   text-underline-offset: 0.2em;
 }
 
-.community-maps-link:hover {
-  color: var(--community-cyan);
+.loja-fisica-maps-link:hover {
+  color: var(--loja-fisica-cyan);
 }
 
 @media (min-width: 768px) {
-  .community-section {
+  .loja-fisica-section {
     min-height: 45rem;
     grid-template-areas:
       "map"
@@ -207,39 +207,39 @@
     background-position: center;
   }
 
-  .community-map {
+  .loja-fisica-map {
     width: min(100%, 35.75rem);
     height: 15.625rem;
   }
 
-  .community-tag {
+  .loja-fisica-tag {
     margin: 1.5rem 0 0;
   }
 
-  .community-description {
+  .loja-fisica-description {
     padding: 0.5rem 0 1rem;
     font-size: 1.125rem;
     line-height: 1.45;
   }
 
-  .community-testimonials {
+  .loja-fisica-testimonials {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     align-self: end;
   }
 
-  .community-maps-link {
+  .loja-fisica-maps-link {
     margin-top: 0.75rem;
   }
 }
 
 @media (max-width: 420px) {
-  .community-section {
+  .loja-fisica-section {
     padding: 0 1rem 1.25rem;
     background-position: 42% center;
   }
 
-  .community-description {
+  .loja-fisica-description {
     padding-block: 1.625rem 2.375rem;
   }
 
