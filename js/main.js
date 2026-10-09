@@ -22,19 +22,21 @@ const createTextElement = (tagName, className, text) => {
 };
 
 const renderNavigation = () => {
+  const categoryPage = document.body.dataset.categoryPage;
+
   document.querySelectorAll("[data-navigation-list]").forEach((list) => {
     const fragment = document.createDocumentFragment();
 
     content.navigation.forEach((item) => {
       const listItem = document.createElement("li");
       const link = document.createElement("a");
-      link.href = item.href;
+      link.href = item.category
+        ? `/${item.category}/`
+        : `${categoryPage ? "/" : ""}#${item.anchor}`;
       link.textContent = item.label;
 
       if (item.category) {
-        link.dataset.categoryLink = item.category;
-
-        if (item.category === content.defaultCategory) {
+        if (item.category === categoryPage) {
           link.setAttribute("aria-current", "page");
         }
       }
@@ -91,8 +93,10 @@ const renderHero = () => {
     }
 
     const contactLink = requireElement("[data-slide-contact]", slideFragment);
-    contactLink.href = `https://wa.me/${content.whatsappNumber}?text=${encodeURIComponent(category.whatsappMessage)}`;
+    contactLink.href = `/${category.id}/`;
     contactLink.textContent = category.buttonLabel;
+    contactLink.removeAttribute("target");
+    contactLink.removeAttribute("rel");
 
     if (category.figureModifier) {
       figure.classList.add(category.figureModifier);
@@ -146,68 +150,71 @@ const createCarouselControl = (category, symbol) => {
   return control;
 };
 
-const renderLookbook = () => {
-  const grid = requireElement("[data-lookbook-grid]");
+const createLookbookItem = (item) => {
+  const listItem = document.createElement("li");
+  listItem.className = `lookbook-item lookbook-item--${item.variant}`;
+
+  const figure = document.createElement("figure");
+  figure.className = "lookbook-card";
+
+  const image = document.createElement("img");
+  image.src = item.src;
+  image.alt = item.alt;
+  image.loading = "lazy";
+  image.decoding = "async";
+
+  figure.append(image);
+  listItem.append(figure);
+  return listItem;
+};
+
+const renderLookbook = (items, grid) => {
   const fragment = document.createDocumentFragment();
 
-  content.lookbook.forEach((item) => {
-    const listItem = document.createElement("li");
-    listItem.className = `lookbook-item lookbook-item--${item.variant}`;
-
-    const figure = document.createElement("figure");
-    figure.className = "lookbook-card";
-
-    const image = document.createElement("img");
-    image.src = item.image;
-    image.alt = item.imageAlt;
-    image.loading = "lazy";
-    image.decoding = "async";
-
-    figure.append(image);
-    listItem.append(figure);
-    fragment.append(listItem);
+  items.forEach((item) => {
+    fragment.append(createLookbookItem(item));
   });
 
   grid.replaceChildren(fragment);
 };
 
-const initHeroCategoryNavigation = () => {
-  const carousel = requireElement(".hero-carousel");
-  const toggles = [...carousel.querySelectorAll(".hero-slide-toggle")];
-  const navigationLinks = document.querySelectorAll("[data-category-link]");
+const renderCategoryLookbook = (category) => {
+  const grid = requireElement("[data-category-lookbook-grid]");
+  const items = content.lookbook.filter((item) => item.category === category);
 
-  const updateNavigation = () => {
-    const activeCategory = toggles.find((toggle) => toggle.checked)?.id.replace("hero-", "");
+  renderLookbook(items, grid);
+  if (items.length > 0) return;
 
-    navigationLinks.forEach((link) => {
-      if (link.dataset.categoryLink === activeCategory) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  };
+  const categoryLabel =
+    content.categories.find((item) => item.id === category)?.label ?? category;
+  const listItem = document.createElement("li");
+  listItem.className = "category-lookbook-empty-item";
+  const emptyState = document.createElement("article");
+  emptyState.className = "category-empty-state";
+  const heading = createTextElement(
+    "h2",
+    "",
+    category === "infantil"
+      ? "Em breve, novidades para os pequenos"
+      : `Em breve, novidades em ${categoryLabel}`,
+  );
+  const message = createTextElement(
+    "p",
+    "",
+    `Estamos preparando novidades para a categoria ${categoryLabel}.`,
+  );
+  const contactLink = createTextElement(
+    "a",
+    "category-empty-contact",
+    "Chamar no WhatsApp",
+  );
+  contactLink.href = `https://wa.me/${content.whatsappNumber}?text=${encodeURIComponent(`Olá, quero saber sobre novidades da categoria ${categoryLabel}`)}`;
+  contactLink.target = "_blank";
+  contactLink.rel = "noopener noreferrer";
 
-  const selectCategory = (categoryId) => {
-    const toggle = toggles.find((item) => item.id === `hero-${categoryId}`);
-    if (!toggle || toggle.checked) return;
-
-    toggle.checked = true;
-    toggle.dispatchEvent(new Event("change", { bubbles: true }));
-  };
-
-  carousel.addEventListener("change", updateNavigation);
-  navigationLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      selectCategory(link.dataset.categoryLink);
-    });
-  });
-  window.addEventListener("hashchange", () => {
-    selectCategory(window.location.hash.slice(1));
-  });
-
-  selectCategory(window.location.hash.slice(1));
-  updateNavigation();
+  emptyState.append(heading, message, contactLink);
+  listItem.append(emptyState);
+  grid.append(listItem);
 };
 
 const initHeroCarousel = () => {
@@ -334,10 +341,20 @@ const initMobileNavigation = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  window.renderSharedLayout();
   renderNavigation();
-  renderHero();
-  renderLookbook();
-  initHeroCategoryNavigation();
-  initHeroCarousel();
+
+  const categoryPage = document.body.dataset.categoryPage;
+  if (categoryPage) {
+    if (!content.categories.some((category) => category.id === categoryPage)) {
+      throw new Error(`Categoria de página desconhecida: ${categoryPage}`);
+    }
+    renderCategoryLookbook(categoryPage);
+  } else {
+    renderHero();
+    renderLookbook(content.lookbook, requireElement("[data-lookbook-grid]"));
+    initHeroCarousel();
+  }
+
   initMobileNavigation();
 });

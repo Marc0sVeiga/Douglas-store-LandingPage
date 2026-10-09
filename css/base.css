@@ -28,6 +28,8 @@
   --lookbook-image-border: #dce5f2;
   --lookbook-radius: 0.5rem;
   --lookbook-gap: 0.5rem;
+  --lookbook-padding: 0.75rem;
+  --lookbook-content-width: 78.75rem;
 }
 
 *,

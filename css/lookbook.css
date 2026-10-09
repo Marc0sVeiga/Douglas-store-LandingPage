@@ -1,11 +1,11 @@
 .lookbook-section {
-  padding: 0.75rem;
+  padding: var(--lookbook-padding);
   border: 1px solid var(--lookbook-frame);
   background-color: var(--lookbook-bg);
 }
 
 .lookbook-inner {
-  width: min(100%, 1260px);
+  width: min(100%, var(--lookbook-content-width));
   margin-inline: auto;
 }
 
