@@ -1,0 +1,253 @@
+.community-section {
+  --community-cyan: #7df4ff;
+  --community-text: #e3e9fc;
+  --community-border: #7df4ff;
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-areas:
+    "heading"
+    "map"
+    "description"
+    "testimonials"
+    "maps-link";
+  justify-items: center;
+  gap: 0;
+  overflow: hidden;
+  padding: 2rem 1rem 2.5rem;
+  border: 1px solid var(--community-border);
+  background:
+    linear-gradient(
+      180deg,
+      rgb(0 0 0 / 78%) 0%,
+      rgb(0 0 0 / 45%) 50%,
+      rgb(0 0 0 / 88%) 100%
+    ),
+    url("../public/images/loja-fachada.jpg") center 38% / cover no-repeat;
+  color: #fff;
+}
+
+.community-tag {
+  grid-area: heading;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  justify-self: center;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 0.875rem;
+  border: 1px solid rgb(220 225 255 / 40%);
+  border-radius: 999px;
+  background: #000;
+  color: #dce1ff;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.community-tag-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--community-cyan);
+  box-shadow: 0 0 0.75rem rgb(125 244 255 / 65%);
+}
+
+.community-map {
+  grid-area: map;
+  width: min(100%, 35.75rem);
+  height: 11.25rem;
+  overflow: hidden;
+  border: 2px solid rgb(220 225 255 / 65%);
+  border-radius: 0.75rem;
+  background: #dce1ff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 35%);
+}
+
+.community-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.community-description {
+  grid-area: description;
+  max-width: 38rem;
+  margin: 0;
+  padding: 1rem 0 1.25rem;
+  color: var(--community-text);
+  font-family: "Chivo", var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.community-testimonials {
+  grid-area: testimonials;
+  display: grid;
+  width: 100%;
+  max-width: 76rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.community-testimonials li {
+  min-width: 0;
+}
+
+.testimonial-card {
+  display: flex;
+  min-height: 12.625rem;
+  height: 100%;
+  flex-direction: column;
+  padding: 1.125rem 1.25rem;
+  border: 1px solid rgb(125 244 255 / 35%);
+  border-radius: 0.75rem;
+  background: rgb(0 0 0 / 84%);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 24%);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.testimonial-avatar {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #1a56f0;
+  color: #fff;
+  font-family: "Chivo", var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.testimonial-identity {
+  min-width: 0;
+}
+
+.testimonial-name {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.testimonial-rating {
+  display: block;
+  color: #fbbf24;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+.testimonial-quote {
+  margin: 1rem 0 0;
+  color: var(--community-text);
+  font-family: "Chivo", var(--font-body);
+  font-size: 0.875rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.testimonial-verified {
+  margin: auto 0 0;
+  padding-top: 1rem;
+  color: var(--community-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+}
+
+.community-maps-link {
+  grid-area: maps-link;
+  justify-self: center;
+  margin-top: 1rem;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+  text-decoration-color: var(--community-cyan);
+  text-underline-offset: 0.2em;
+}
+
+.community-maps-link:hover {
+  color: var(--community-cyan);
+}
+
+@media (min-width: 768px) {
+  .community-section {
+    min-height: 45rem;
+    grid-template-areas:
+      "map"
+      "heading"
+      "description"
+      "testimonials"
+      "maps-link";
+    grid-template-rows: 15.625rem auto auto 1fr auto;
+    padding: 2.625rem 2rem 3rem;
+    background-position: center;
+  }
+
+  .community-map {
+    width: min(100%, 35.75rem);
+    height: 15.625rem;
+  }
+
+  .community-tag {
+    margin: 1.5rem 0 0;
+  }
+
+  .community-description {
+    padding: 0.5rem 0 1rem;
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  .community-testimonials {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-self: end;
+  }
+
+  .community-maps-link {
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .community-section {
+    padding: 0 1rem 1.25rem;
+    background-position: 42% center;
+  }
+
+  .community-description {
+    padding-block: 1.625rem 2.375rem;
+  }
+
+  .testimonial-card {
+    padding: 1.125rem;
+  }
+
+  .testimonial-name {
+    font-size: 0.9375rem;
+  }
+}

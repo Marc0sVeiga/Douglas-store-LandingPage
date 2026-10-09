@@ -8,6 +8,7 @@ window.douglasStoreContent = {
     { label: "Acessórios", href: "#acessorios", category: "acessorios" },
     { label: "Sobre", href: "#sobre" },
     { label: "Lookbook", href: "#lookbook" },
+    { label: "Loja & Comunidade", href: "#comunidade" },
   ],
   categories: [
     {
