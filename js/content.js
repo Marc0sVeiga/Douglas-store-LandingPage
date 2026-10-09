@@ -6,6 +6,7 @@ window.douglasStoreContent = {
     { label: "Feminino", href: "#feminino", category: "feminino" },
     { label: "Infantil", href: "#infantil", category: "infantil" },
     { label: "Acessórios", href: "#acessorios", category: "acessorios" },
+    { label: "Sobre", href: "#sobre" },
     { label: "Lookbook", href: "#lookbook" },
   ],
   categories: [
