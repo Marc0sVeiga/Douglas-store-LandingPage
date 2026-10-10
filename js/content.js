@@ -1,5 +1,5 @@
 window.douglasStoreContent = {
-  whatsappNumber: "5567999999999",
+  whatsappNumber: "5567991204987",
   defaultCategory: "feminino",
   navigation: [
     { label: "Masculino", category: "masculino" },

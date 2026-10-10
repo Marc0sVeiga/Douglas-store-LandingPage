@@ -16,6 +16,9 @@ const getSitePath = (path = "") => {
 
 window.douglasStorePath = getSitePath;
 
+const getWhatsAppUrl = (message = "Olá, Douglas Store!") =>
+  `https://wa.me/${window.douglasStoreContent.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
 window.renderSharedLayout = () => {
   const header = document.querySelector("[data-shared-header]");
   const footer = document.querySelector("[data-shared-footer]");
@@ -44,10 +47,10 @@ window.renderSharedLayout = () => {
       <nav class="desktop-navigation" aria-label="Navegação principal">
         <ul class="navigation-list" data-navigation-list></ul>
       </nav>
-      <a class="whatsapp-link desktop-whatsapp" href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Douglas%20Store!" target="_blank" rel="noopener noreferrer">
+      <a class="whatsapp-link desktop-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer">
         ${whatsappIcon}<span>WhatsApp</span>
       </a>
-      <a class="whatsapp-link mobile-whatsapp" href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Douglas%20Store!" target="_blank" rel="noopener noreferrer" aria-label="Falar com a Douglas Store pelo WhatsApp">
+      <a class="whatsapp-link mobile-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" aria-label="Falar com a Douglas Store pelo WhatsApp">
         ${whatsappIcon}
       </a>
     </div>
@@ -66,7 +69,7 @@ window.renderSharedLayout = () => {
       <nav class="drawer-navigation" aria-label="Navegação mobile">
         <ul class="drawer-navigation-list" data-navigation-list></ul>
       </nav>
-      <a class="whatsapp-link drawer-whatsapp" href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Douglas%20Store!" target="_blank" rel="noopener noreferrer">
+      <a class="whatsapp-link drawer-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer">
         ${whatsappIcon}<span>WhatsApp</span>
       </a>
     </aside>`;
@@ -80,11 +83,11 @@ window.renderSharedLayout = () => {
       </span>
     </a>
     <nav class="footer-actions" aria-label="Redes sociais e contato">
-      <a class="footer-action" href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Douglas%20Store!" target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp (abre em nova aba)">
+      <a class="footer-action" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp (abre em nova aba)">
         ${whatsappIcon}<span>Chamar no WhatsApp</span>
       </a>
-      <a class="footer-action" href="https://www.instagram.com/douglas.storeoficial1/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Douglas Store: @douglas.storeoficial1 (abre em nova aba)">
-        <span aria-hidden="true">IG</span><span>@Douglas.StoreOficial1</span>
+      <a class="footer-action" href="https://www.instagram.com/douglas.store1/" aria-label="Abrir perfil da Douglas Store no Instagram">
+        <span aria-hidden="true">IG</span><span>@Douglas.Store1</span>
       </a>
     </nav>
     <hr class="footer-divider" aria-hidden="true" />
