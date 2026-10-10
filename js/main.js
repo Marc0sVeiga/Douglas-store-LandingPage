@@ -282,7 +282,7 @@ const initMobileNavigation = () => {
 
   if (!toggle || !menu || !backdrop || !closeButton) return;
 
-  const mobileBreakpoint = window.matchMedia("(max-width: 767px)");
+  const mobileBreakpoint = window.matchMedia("(max-width: 1034px)");
   const getFocusableElements = () => menu.querySelectorAll("a[href], button:not([disabled])");
 
   const closeMenu = (returnFocus = true) => {

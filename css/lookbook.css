@@ -78,7 +78,7 @@
   transform: scale(1.03);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .lookbook-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
