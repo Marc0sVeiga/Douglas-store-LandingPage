@@ -19,6 +19,9 @@ window.douglasStorePath = getSitePath;
 const getWhatsAppUrl = (message = "Olá, Douglas Store!") =>
   `https://wa.me/${window.douglasStoreContent.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
+const getWhatsAppAppUrl = (message = "Olá, Douglas Store!") =>
+  `whatsapp://send?phone=${window.douglasStoreContent.whatsappNumber}&text=${encodeURIComponent(message)}`;
+
 window.renderSharedLayout = () => {
   const header = document.querySelector("[data-shared-header]");
   const footer = document.querySelector("[data-shared-footer]");
@@ -50,7 +53,7 @@ window.renderSharedLayout = () => {
       <a class="whatsapp-link desktop-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer">
         ${whatsappIcon}<span>WhatsApp</span>
       </a>
-      <a class="whatsapp-link mobile-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" aria-label="Falar com a Douglas Store pelo WhatsApp">
+      <a class="whatsapp-link mobile-whatsapp" href="${getWhatsAppUrl()}" data-app-link="${getWhatsAppAppUrl()}" aria-label="Falar com a Douglas Store pelo WhatsApp">
         ${whatsappIcon}
       </a>
     </div>
@@ -69,7 +72,7 @@ window.renderSharedLayout = () => {
       <nav class="drawer-navigation" aria-label="Navegação mobile">
         <ul class="drawer-navigation-list" data-navigation-list></ul>
       </nav>
-      <a class="whatsapp-link drawer-whatsapp" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer">
+      <a class="whatsapp-link drawer-whatsapp" href="${getWhatsAppUrl()}" data-app-link="${getWhatsAppAppUrl()}">
         ${whatsappIcon}<span>WhatsApp</span>
       </a>
     </aside>`;
@@ -83,10 +86,10 @@ window.renderSharedLayout = () => {
       </span>
     </a>
     <nav class="footer-actions" aria-label="Redes sociais e contato">
-      <a class="footer-action" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp (abre em nova aba)">
+      <a class="footer-action" href="${getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" data-app-link="${getWhatsAppAppUrl()}" aria-label="Chamar no WhatsApp">
         ${whatsappIcon}<span>Chamar no WhatsApp</span>
       </a>
-      <a class="footer-action" href="https://www.instagram.com/douglas.store1/" aria-label="Abrir perfil da Douglas Store no Instagram">
+      <a class="footer-action" href="https://www.instagram.com/douglas.store1/" data-app-link="instagram://user?username=douglas.store1" aria-label="Abrir perfil da Douglas Store no Instagram">
         <span aria-hidden="true">IG</span><span>@Douglas.Store1</span>
       </a>
     </nav>

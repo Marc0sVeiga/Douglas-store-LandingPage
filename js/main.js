@@ -211,6 +211,7 @@ const renderCategoryLookbook = (category) => {
   contactLink.href = `https://wa.me/${content.whatsappNumber}?text=${encodeURIComponent(`Olá, quero saber sobre novidades da categoria ${categoryLabel}`)}`;
   contactLink.target = "_blank";
   contactLink.rel = "noopener noreferrer";
+  contactLink.dataset.appLink = `whatsapp://send?phone=${content.whatsappNumber}&text=${encodeURIComponent(`Olá, quero saber sobre novidades da categoria ${categoryLabel}`)}`;
 
   emptyState.append(heading, message, contactLink);
   listItem.append(emptyState);
@@ -340,9 +341,59 @@ const initMobileNavigation = () => {
   });
 };
 
+const initNativeAppLinks = () => {
+  const mobileDevice =
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    window.matchMedia("(max-width: 1034px)").matches;
+
+  if (!mobileDevice) return;
+
+  document.querySelectorAll("a[data-app-link]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      let appOpened = false;
+      const cleanup = () => {
+        window.removeEventListener("blur", markAppOpened);
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+        window.clearTimeout(fallbackTimer);
+      };
+      const markAppOpened = () => {
+        appOpened = true;
+        cleanup();
+      };
+      const handleVisibilityChange = () => {
+        if (document.hidden) markAppOpened();
+      };
+      const fallbackTimer = window.setTimeout(() => {
+        if (!appOpened && !document.hidden) {
+          cleanup();
+          window.location.href = link.href;
+        }
+      }, 1200);
+
+      window.addEventListener("blur", markAppOpened, { once: true });
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      window.location.href = link.dataset.appLink;
+    });
+  });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   window.renderSharedLayout();
   renderNavigation();
+  initNativeAppLinks();
 
   const categoryPage = document.body.dataset.categoryPage;
   if (categoryPage) {
