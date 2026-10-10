@@ -31,8 +31,8 @@ const renderNavigation = () => {
       const listItem = document.createElement("li");
       const link = document.createElement("a");
       link.href = item.category
-        ? `/${item.category}/`
-        : `${categoryPage ? "/" : ""}#${item.anchor}`;
+        ? window.douglasStorePath(`${item.category}/`)
+        : `${categoryPage ? window.douglasStorePath() : ""}#${item.anchor}`;
       link.textContent = item.label;
 
       if (item.category) {
@@ -93,7 +93,7 @@ const renderHero = () => {
     }
 
     const contactLink = requireElement("[data-slide-contact]", slideFragment);
-    contactLink.href = `/${category.id}/`;
+    contactLink.href = window.douglasStorePath(`${category.id}/`);
     contactLink.textContent = category.buttonLabel;
     contactLink.removeAttribute("target");
     contactLink.removeAttribute("rel");
@@ -102,7 +102,7 @@ const renderHero = () => {
       figure.classList.add(category.figureModifier);
     }
     const image = requireElement("[data-slide-image]", slideFragment);
-    image.src = category.image;
+    image.src = window.douglasStorePath(category.image);
     image.alt = category.imageAlt;
 
     panels.append(slideFragment);
@@ -158,7 +158,7 @@ const createLookbookItem = (item) => {
   figure.className = "lookbook-card";
 
   const image = document.createElement("img");
-  image.src = item.src;
+  image.src = window.douglasStorePath(item.src);
   image.alt = item.alt;
   image.loading = "lazy";
   image.decoding = "async";

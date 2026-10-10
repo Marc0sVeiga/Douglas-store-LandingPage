@@ -1,3 +1,21 @@
+const getSitePath = (path = "") => {
+  const pathSegments = window.location.pathname.split("/").filter(Boolean);
+
+  if (pathSegments[pathSegments.length - 1] === "index.html") {
+    pathSegments.pop();
+  }
+
+  const categoryPage = document.body.dataset.categoryPage;
+  if (categoryPage && pathSegments[pathSegments.length - 1] === categoryPage) {
+    pathSegments.pop();
+  }
+
+  const basePath = `/${pathSegments.join("/")}${pathSegments.length ? "/" : ""}`;
+  return `${basePath}${path.replace(/^\.?\/+/, "")}`;
+};
+
+window.douglasStorePath = getSitePath;
+
 window.renderSharedLayout = () => {
   const header = document.querySelector("[data-shared-header]");
   const footer = document.querySelector("[data-shared-footer]");
@@ -16,8 +34,8 @@ window.renderSharedLayout = () => {
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-navigation" data-menu-toggle>
         <span></span><span></span><span></span>
       </button>
-      <a class="brand" href="/" aria-label="Douglas Store - início">
-        <span class="brand-mark"><img src="/public/logo.jpg" alt="" /></span>
+      <a class="brand" href="${getSitePath()}" aria-label="Douglas Store - início">
+        <span class="brand-mark"><img src="${getSitePath("public/logo.jpg")}" alt="" /></span>
         <span class="brand-copy">
           <span class="brand-name">Douglas Store</span>
           <span class="brand-location">Campo Grande - MS</span>
@@ -36,8 +54,8 @@ window.renderSharedLayout = () => {
     <button class="menu-backdrop" type="button" aria-label="Fechar menu" data-menu-overlay hidden></button>
     <aside class="mobile-drawer" id="mobile-navigation" aria-label="Menu de navegação" aria-modal="true" role="dialog" data-mobile-menu hidden>
       <div class="drawer-header">
-        <a class="brand drawer-brand" href="/" aria-label="Douglas Store - início">
-          <span class="brand-mark"><img src="/public/logo.jpg" alt="" /></span>
+        <a class="brand drawer-brand" href="${getSitePath()}" aria-label="Douglas Store - início">
+          <span class="brand-mark"><img src="${getSitePath("public/logo.jpg")}" alt="" /></span>
           <span class="brand-copy">
             <span class="brand-name">Douglas Store</span>
             <span class="brand-location">Campo Grande - MS</span>
@@ -54,8 +72,8 @@ window.renderSharedLayout = () => {
     </aside>`;
 
   footer.innerHTML = `
-    <a class="footer-brand" href="/" aria-label="Douglas Store - voltar ao início">
-      <span class="footer-brand-mark"><img src="/public/logo.jpg" alt="Logo Douglas Store" /></span>
+    <a class="footer-brand" href="${getSitePath()}" aria-label="Douglas Store - voltar ao início">
+      <span class="footer-brand-mark"><img src="${getSitePath("public/logo.jpg")}" alt="Logo Douglas Store" /></span>
       <span class="footer-brand-copy">
         <span class="footer-brand-name">Douglas Store</span>
         <span class="footer-brand-location">Campo Grande - MS</span>
